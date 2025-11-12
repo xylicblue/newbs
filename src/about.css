@@ -1,0 +1,166 @@
+/* General styles for the About page */
+.about-page {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+.about-header {
+    background-color: rgba(26, 32, 44, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    border-bottom: 1px solid #4a5568;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Re-using nav styles from index.css for consistency */
+.about-header .logo {
+  color: white;            /* Sets the text color to white */
+  text-decoration: none;   /* Removes the underline */
+}
+.about-header .nav-links a {
+    color: var(--light-text);
+}
+.about-header .nav-links a:hover {
+    color: var(--primary-color);
+}
+
+
+/* --- About Hero Section --- */
+.about-hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--section-padding);
+}
+
+.about-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.about-hero .subtitle {
+    font-size: 1.25rem;
+    color: var(--light-gray-text);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* --- Team Section --- */
+.team-section {
+    background-color: #161a23; /* Slightly different dark shade */
+    padding: var(--section-padding);
+}
+
+.team-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.team-photo img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.team-bio h2 {
+    font-size: 1rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.team-bio h3 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    /* margin-top: 10px; */
+}
+
+.team-bio .quote {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--primary-color);
+    color: var(--light-gray-text);
+}
+
+/* --- Values Section --- */
+.values-section {
+    padding: var(--section-padding);
+}
+
+.values-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 4rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background-color: transparent;
+    border: 1px solid #4a5568;
+    padding: 2rem;
+    border-radius: 12px;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.value-card:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.value-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.value-card p {
+    color: var(--light-gray-text);
+}
+
+
+/* --- Footer --- */
+.about-footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #4a5568;
+    color: var(--light-gray-text);
+}
+
+
+/* --- RESPONSIVE STYLES --- */
+@media (max-width: 900px) {
+    .team-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2.25rem;
+    }
+    .team-bio h3 {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,599 @@
+/* src/dropdown.css */
+
+/* ... (all the other styles like .profile-container, .profile-trigger, etc. are correct) ... */
+.profile-container {
+  position: relative;
+  z-index: 1010;
+}
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+  color: #f7fafc;
+  font-weight: 600;
+}
+.profile-trigger:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #007BFF;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 280px;
+  z-index: 1020;
+  background-color: #1a202c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: #f7fafc;
+  overflow: hidden;
+}
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+.user-info strong {
+  font-size: 0.95rem;
+}
+.user-info small {
+  font-size: 0.8rem;
+  color: #a0aec0;
+}
+.dropdown-section {
+  padding: 1rem;
+}
+.kyc-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+.status-badge.not_verified {
+  background-color: rgba(252, 129, 129, 0.2);
+  color: #fc8181;
+}
+.status-badge.verified {
+  background-color: rgba(72, 187, 120, 0.2);
+  color: #48bb78;
+}
+.verify-button {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background-image: linear-gradient(to right, #007BFF, #0056b3);
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+.verify-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 25px rgba(0, 123, 255, 0.4);
+}
+
+
+/* --- THE CRITICAL FIX IS HERE --- */
+#sumsub-websdk-container {
+  /* This property tells the browser that this element should be "invisible" to mouse clicks.
+     Clicks will pass right through it to the elements underneath (like your navbar). */
+  pointer-events: none;
+  
+  /* We also make it visually hidden until the SDK injects content into it. */
+  opacity: 0;
+  
+  /* The rest of the properties are fine, as the SDK will override them when it launches. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+/* --- ADD THIS NEW RULE --- */
+/* This style applies ONLY when the SDK container should be visible */
+#sumsub-websdk-container.sdk-active {
+  /* This makes the container visible */
+  opacity: 1;
+
+  /* This allows the user to click on the SDK elements */
+  pointer-events: auto;
+
+  /* Optional: A nice fade-in effect */
+  transition: opacity 0.3s ease-in-out;
+}
+
+#sumsub-websdk-container.sdk-active {
+  /* This makes the container visible */
+  opacity: 1;
+  /* This allows the user to click on the SDK elements */
+  pointer-events: auto;
+  /* Optional: A nice fade-in effect */
+  transition: opacity 0.3s ease-in-out;
+
+  /* --- ADD THESE NEW PROPERTIES FOR THE MODAL EFFECT --- */
+
+  /* Create the semi-transparent background overlay */
+  background-color: rgba(10, 10, 20, 0.7);
+
+  /* Add a "frosted glass" effect to blur the background content */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  /* Use flexbox to perfectly center the SDK content within the overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sumsub-websdk-container.sdk-active {
+  /* ... (keep all the existing properties like opacity, background-color, display: flex, etc.) ... */
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease-in-out;
+  background-color: rgba(10, 10, 20, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* --- ADD THIS LINE TO FIX THE SCROLLING --- */
+  overflow-y: auto; 
+}
+
+/* In dropdown.css */
+
+.logout-button {
+  width: 100%;
+  margin-top: 0.75rem; /* Add some space above the button */
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1); /* A subtle, secondary style */
+  color: #a0aec0; /* Lighter text color */
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+  background-color: rgba(220, 53, 69, 0.9); /* A clear red for a "logout" action */
+  color: #ffffff;
+}
+
+/* In dropdown.css */
+
+.wallet-section {
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.connect-button {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #007BFF;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #007BFF;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.connect-button:hover {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+.wallet-connected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-address-label {
+  font-size: 0.8rem;
+  color: #a0aec0;
+}
+
+.wallet-address {
+  font-family: monospace;
+  font-size: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.disconnect-button {
+  background: none;
+  border: none;
+  color: #fc8181;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+.disconnect-button:hover {
+  text-decoration: underline;
+}
+
+.wallet-error {
+  color: #fc8181;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.wallet-section {
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Connect Button Style --- */
+.connect-button {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #007BFF;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #007BFF;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.connect-button:hover:not(:disabled) {
+  background-color: #007BFF;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.connect-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- "Wallet Connected" State Styles --- */
+.wallet-connected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(40, 167, 69, 0.1); /* Subtle green background */
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Little green dot to show "connected" */
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #28a745;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #28a745;
+}
+
+.wallet-address {
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #f7fafc;
+}
+
+/* --- The new Disconnect Button --- */
+.disconnect-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #a0aec0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.disconnect-button:hover:not(:disabled) {
+  background-color: #dc3545; /* Red on hover */
+  border-color: #dc3545;
+  color: #fff;
+}
+/* In dropdown.css --- THE UPGRADED STYLES --- */
+
+/* --- "Wallet Connected" State Styles --- */
+.wallet-connected {
+  /* Use flexbox to align items in a row */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes items to the ends */
+  
+  /* Styling for the container box */
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Left-side content (dot and address) --- */
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Increased gap for better spacing */
+}
+
+/* Green "connected" status indicator */
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #28a745; /* Bright green */
+  border-radius: 50%;
+  /* Add a glowing effect for a premium feel */
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.7);
+}
+
+/* The wallet address text */
+.wallet-address {
+  font-family: monospace;
+  font-size: 1rem; /* Slightly larger for readability */
+  color: #f7fafc;
+  font-weight: 500;
+}
+
+/* --- The new Disconnect Button --- */
+.disconnect-button {
+  background-color: transparent;
+  border: none;
+  color: #a0aec0; /* A soft, secondary gray color */
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.disconnect-button:hover:not(:disabled) {
+  background-color: #dc3545; /* Red on hover */
+  color: #fff;
+}
+
+/* In dropdown.css --- Add these new styles --- */
+
+/* Wrapper for the main profile trigger and the new icon button */
+.profile-trigger-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-trigger {
+  border: none;
+  /* Remove individual hover effect from the main trigger if you want a unified feel */
+}
+
+/* --- The new Wallet Icon Button in the Header --- */
+.wallet-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+  cursor: pointer;
+  padding: 0.6rem;
+  margin-left: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.wallet-icon-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.wallet-icon-button svg {
+  width: 20px;
+  height: 20px;
+  color: #a0aec0; /* Soft gray */
+}
+
+/* --- The new custom "Connect Wallet" button in the dropdown --- */
+.custom-connect-button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background-image: linear-gradient(to right, #007BFF, #0056b3);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.custom-connect-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 25px rgba(0, 123, 255, 0.4);
+}
+
+/* --- The new "Wallet Connected" status display --- */
+.wallet-connected-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: rgba(40, 167, 69, 0.15);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+  color: #48bb78; /* Green text */
+  font-weight: 600;
+  padding: 0.75rem;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.wallet-connected-custom .status-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #28a745;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.7);
+}
+
+/* In dropdown.css --- REPLACE these styles --- */
+
+/* Wrapper for the main profile trigger and the icon button */
+.profile-trigger-wrapper {
+  display: flex; /* This is correct */
+  align-items: center; /* This ensures vertical alignment */
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px; /* Add a little internal padding */
+  gap: 4px; /* Add a small gap between the two buttons */
+}
+
+/* The main button with the user's avatar and name */
+.profile-trigger {
+  /* This is a flex container for the avatar and name */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.75rem 0.25rem 0.25rem; /* Fine-tune padding */
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+  color: #f7fafc;
+  font-weight: 600;
+}
+
+.profile-trigger:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- The new, beautiful Wallet Icon Button --- */
+.wallet-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+  cursor: pointer;
+  padding: 0.6rem;
+  transition: background-color 0.2s ease;
+  border-radius: 0 999px 999px 0; /* Match the outer rounding */
+}
+
+.wallet-icon-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Style the icon itself from react-icons */
+.wallet-icon-button svg {
+  width: 18px;
+  height: 18px;
+  color: #a0aec0;
+  transition: color 0.2s ease;
+}
+
+.wallet-icon-button:hover svg {
+  color: #ffffff;
+}
+/* In dropdown.css --- FINAL TRIGGER STYLES --- */
+
+/* The main wrapper that aligns the two buttons horizontally */
+.profile-trigger-wrapper {
+  display: flex;
+  align-items: center; /* This ensures perfect vertical alignment */
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px; /* Fully rounded pill shape */
+  transition: background-color 0.2s ease;
+}
+
+.profile-trigger-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* The button for the user's name and avatar */
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  color: #f7fafc;
+  font-weight: 600;
+}
+
+/* The button for the wallet icon */
+.wallet-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  /* A subtle vertical line to separate the two buttons */
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  padding: 0.75rem;
+  align-self: stretch; /* Makes the separator line full height */
+  color: #a0aec0; /* A soft gray for the icon */
+  transition: color 0.2s ease;
+}
+
+.wallet-icon-button:hover {
+  color: #ffffff;
+}
+
+.wallet-icon-button svg {
+  width: 18px;
+  height: 18px;
+}

@@ -1,0 +1,2201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+:root {
+  --primary-color: #007BFF;
+  --primary-hover-color: #0056b3;
+  --dark-bg: #1a202c; /* Deeper dark blue/grey */
+  --light-text: #f7fafc;
+  --dark-text: #2d3748;
+  --section-padding: 5rem 2rem;
+ 
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #ffffff;
+    color: var(--dark-text);
+    line-height: 1.7;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.hero {
+    color: #fff;
+    text-align: center;
+    padding: var(--section-padding);
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(10, 25, 47, 0.7); /* Dark blue overlay */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+}
+
+.content-section {
+    padding: var(--section-padding);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content-section-dark {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    padding: var(--section-padding);
+}
+
+.content-section-dark .content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.content-section-dark h2, .content-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.content-section-dark ul {
+    list-style: none;
+    padding: 0;
+}
+
+.content-section-dark li {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.content-section-dark li span {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.subtext {
+    font-style: italic;
+    margin-top: 3rem;
+    text-align: center;
+    color: #a0aec0;
+}
+
+.form-section {
+    padding: var(--section-padding);
+    background-color: #f8f9fa;
+}
+
+.form-section form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-section h2, .form-section p {
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:-30px
+}
+
+.form-section p {
+    margin-bottom: 2rem;
+    margin-top: 5px;
+    
+}
+
+#interest-form input, #interest-form textarea {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+#interest-form input:focus, #interest-form textarea:focus {
+    outline: 2px solid var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+#interest-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#interest-form button {
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.legal-section {
+    background-color: var(--dark-bg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #f3f3f3;
+    margin-top: -55px;
+}
+
+.legal-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+footer {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+/* ========================================= */
+/* ===         RESPONSIVE STYLES         === */
+/* ========================================= */
+
+.hamburger {
+    display: none; /* Hidden by default on desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display:none;
+    padding: 0;
+    z-index: 10;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--dark-text);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Media Query for mobile devices */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 100%; /* Position it right below the header */
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        /* Hide the menu by default */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+    }
+
+    .nav-links.active {
+        max-height: 500px; /* A large enough value to show all links */
+        padding: 1rem 0 2rem 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .hamburger {
+        display: flex; /* Show the hamburger on mobile */
+    }
+
+    /* Make the hero section title a bit smaller on mobile */
+    .hero h1 {
+        font-size: clamp(2rem, 10vw, 2.5rem);
+    }
+}
+
+/* ========================================================= */
+/* ===       STYLES FOR NEW INTERACTIVE SECTIONS       === */
+/* ========================================================= */
+
+/* --- Styling for Section 2: Split Layout --- */
+
+/* .split-section {
+    display: flex;
+    align-items: center;
+    
+    gap: 4rem;
+    padding: var(--section-padding);
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--dark-bg);
+} */
+ .split-section {
+    /* Set the background on the main section wrapper */
+    background-color: var(--dark-bg);
+    padding: var(--section-padding) 0; /* Apply vertical padding, but remove horizontal padding */
+    margin-top:-70px
+}
+.split-section-container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto -10px auto;
+    padding: 0 2rem; /* Apply horizontal padding here */
+}
+
+.split-section-text {
+    flex: 1;
+    color: #d4d4d4;
+    min-width: 300px;
+}
+
+.split-section-text h2 {
+    text-align: left;
+}
+
+.split-section-visual {
+    flex: 1;
+}
+
+.split-section-visual img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.subtext-analogy {
+    font-style: italic;
+    color: #bababa;
+    margin-top: 1.5rem;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 1.5rem;
+}
+
+
+/* --- Styling for Section 3: "Why Now?" Card Layout --- */
+.why-now-section h2 {
+    margin-bottom: 4rem;
+    margin-top: -5rem;
+}
+#why-it-matters{
+    margin-bottom: -110px;
+}
+
+.card-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+.card {
+    background-color: #2c3e50; /* A shade darker than the section bg */
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    border: 1px solid #4a5568;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.card p {
+    color: #a0aec0; /* Lighter text for the body */
+    line-height: 1.6;
+}
+
+.icon-container {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+.icon-container svg {
+    width: 32px;
+    height: 32px;
+    color: #ffffff;
+}
+
+
+/* --- RESPONSIVE ADJUSTMENTS FOR NEW SECTIONS --- */
+
+@media (max-width: 900px) {
+    .split-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    .split-section-text h2 {
+        text-align: center;
+    }
+}
+
+/* ========================================================= */
+/* ===           STYLES FOR NEW STYLISH FORM             === */
+/* ========================================================= */
+
+.form-section {
+    padding: 0; /* Remove padding to allow full-bleed background */
+    position: relative;
+    background-color: var(--dark-bg); /* Fallback color */
+    /* You can use a background image for more texture */
+    background-image: url('./assets/hero-background.jpg'); 
+    background-size: cover;
+    background-attachment: fixed; /* Parallax effect */
+    background-position: center;
+}
+
+.form-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background: linear-gradient(rgba(26, 32, 44, 0.95), rgba(26, 32, 44, 0.95)); */
+    z-index: 1;
+    ;
+}
+
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--section-padding);
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--light-text);
+    margin-top:-75px;
+    margin-bottom: -80px
+}
+
+.form-container h2 {
+    color: #fff;
+}
+
+.form-container p {
+    color: var(--light-gray-text);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#interest-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #4a5568;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Important for padding */
+}
+
+.input-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.input-group label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: var(--light-gray-text);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* The floating label magic */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group textarea:focus + label,
+.input-group textarea:not(:placeholder-shown) + label {
+    top: -0.75rem;
+    left: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    background-color: var(--dark-bg); /* Match the form background */
+    padding: 0 0.25rem;
+}
+
+/* The glowing focus effect */
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+}
+
+/* Premium Button Style */
+#interest-form .cta-button {
+    margin-top: 1rem;
+    background-image: linear-gradient(to right, #007BFF, #0056b3);
+    border: none;
+}
+
+#interest-form .cta-button:hover:not(:disabled) {
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+.card {
+    background-color: var(--dark-bg-card);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    border: 1px solid #4a5568;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Crucial for positioning the button */
+    overflow: hidden; /* Prevents content spill during animation */
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* .card-content-wrapper {
+    /* This wrapper helps with layout animations */
+
+
+/* ... keep icon-container, h3, p styles as they were ... */
+
+/* --- The new Expand Button --- */
+.expand-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.card:hover .expand-button {
+    opacity: 1; /* Show on hover */
+}
+
+.expand-button:hover {
+    background-color: var(--primary-color);
+}
+
+.expand-button svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    transition: transform 0.3s ease; /* For rotation */
+}
+
+/* --- The Expanded Content Area --- */
+.expanded-details {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #4a5568;
+    text-align: left;
+}
+
+.expanded-details p {
+    font-size: 0.95rem;
+    color: var(--light-gray-text);
+}
+
+
+/* --- THE NEW SECTION SEPARATOR --- */
+.section-separator {
+    height: 2px;
+    width: 80px;
+    margin: 0 auto;
+    background-image: linear-gradient(to right, rgba(0, 123, 255, 0), var(--primary-color), rgba(0, 123, 255, 0));
+    border-radius: 2px;
+    
+}
+/* --- NEW: Container for the Section Separator --- */
+.separator-container {
+    background-color: var(--dark-bg); 
+    padding: 5rem 0;
+    text-align: center;
+   
+}
+
+
+.logo {
+  display: flex;         /* This is the key: aligns items horizontally */
+  align-items: center;   /* This vertically centers the text and logo */
+  gap: 0.75rem;          /* Creates a nice space between the logo and text */
+}
+
+.logo img {
+  height: 70px;          /* Controls the height of your logo. Adjust as needed. */
+  width: auto;           /* Automatically adjusts width to maintain aspect ratio */
+}
+
+/* ========================================================= */
+/* ===         STYLES FOR PRICE INDEX CHART SECTION      === */
+/* ========================================================= */
+
+.price-index-section {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    padding: var(--section-padding);
+    margin-bottom: -70px;
+}
+
+.price-index-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.current-price-display {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.current-price-display h1 {
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    margin: 0;
+    color: #fff;
+}
+
+.current-price-display span {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.price-up {
+    color: #28a745; /* Green */
+}
+
+.price-down {
+    color: #dc3545; /* Red */
+}
+
+#price-chart-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+/* ================================================================= */
+/* ===         NEW AESTHETIC STYLES FOR PRICE DISPLAY          === */
+/* ================================================================= */
+
+.price-display-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #4a5568; /* Subtle separator line */
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Left Side: Title and Subtitle --- */
+.price-title h2 {
+    margin: 0;
+    font-size: 1.75rem; /* Slightly smaller for better balance */
+    color: #fff;
+    text-align: left; /* Override any global center alignment */
+}
+
+.price-title p {
+    margin: 0;
+    color: var(--light-gray-text); /* Lighter color for context */
+    font-size: 0.9rem;
+}
+
+/* --- Right Side: Price and Change --- */
+.price-value {
+    text-align: right;
+}
+
+.price-value h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--light-gray-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.price-main {
+    display: flex;
+    align-items: baseline; /* Aligns the bottom of the price and change text */
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.price-main h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    color: #fff;
+    line-height: 1;
+}
+
+.price-main span {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* These color classes remain the same */
+.price-up {
+    color: #28a745;
+}
+
+.price-down {
+    color: #dc3545;
+}
+
+
+/* --- Responsive adjustment for smaller screens --- */
+@media (max-width: 600px) {
+    .price-display-header {
+        flex-direction: column;
+        align-items: flex-start; /* Align everything to the left */
+        gap: 1.5rem;
+    }
+    .price-value {
+        text-align: left;
+    }
+    .price-main {
+        justify-content: flex-start;
+    }
+}
+/* === STYLES FOR TIME RANGE TOGGLE BUTTONS === */
+
+.time-range-toggles {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 900px;
+    margin: -1.5rem auto 1rem auto; /* Position it nicely between header and chart */
+}
+
+.time-range-toggles button {
+    background-color: transparent;
+    border: 1px solid #4a5568;
+    color: var(--light-gray-text);
+    padding: 0.25rem 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.time-range-toggles button:hover {
+    background-color: #4a5568;
+    color: #fff;
+}
+
+.time-range-toggles button.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Responsive adjustment for toggles on mobile */
+@media (max-width: 600px) {
+    .time-range-toggles {
+        justify-content: flex-start;
+        margin-top: 0;
+    }
+}
+
+/* ========================================================= */
+/* ===    AESTHETIC UPGRADE FOR PRICE DISPLAY HEADER     === */
+/* ========================================================= */
+
+.price-display-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Left Side: Title --- */
+.price-title h2 {
+    margin: 0;
+    font-size: 1.5rem; /* A balanced size */
+    color: #fff;
+    font-weight: 500; /* Medium weight for a modern feel */
+    text-align: left;
+}
+
+/* --- Right Side: Price and Change --- */
+.price-value {
+    text-align: right;
+}
+
+.price-value h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.75rem; /* Small and clean label */
+    font-weight: 700;
+    color: var(--light-gray-text);
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Spacing for a premium feel */
+}
+
+.price-main {
+    display: flex;
+    align-items: center; /* Vertically center the chip with the price */
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.price-main h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    color: #fff;
+    line-height: 1;
+    font-weight: 600;
+}
+
+/* --- NEW "CHIP" STYLE for Price Change --- */
+.price-change-chip {
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.price-change-chip.price-up {
+    background-color: rgba(40, 167, 69, 0.15); /* Subtle green background */
+    color: #28a745; /* Bright green text */
+}
+
+.price-change-chip.price-down {
+    background-color: rgba(220, 53, 69, 0.15); /* Subtle red background */
+    color: #dc3545; /* Bright red text */
+}
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 600px) {
+    .price-display-header {
+        flex-direction: column;
+        align-items: flex-start; /* Align everything to the left for a clean stack */
+        gap: 1rem; /* Space between the stacked title and price */
+    }
+    .price-value {
+        text-align: left;
+    }
+    .price-main {
+        justify-content: flex-start;
+    }
+}
+
+/*  */
+/* === UPGRADED "CHIP" STYLE for Price Change === */
+
+.price-change-chip {
+    padding: 0.4rem 0.8rem; /* A little more vertical padding */
+    border-radius: 8px; /* Slightly more rounded */
+    display: flex;
+    flex-direction: column; /* Stack the text vertically */
+    align-items: flex-start; /* Align text to the left */
+    justify-content: center;
+    line-height: 1.2; /* Tighter line spacing */
+}
+
+.price-change-chip.price-up {
+    background-color: rgba(40, 167, 69, 0.15);
+}
+
+.price-change-chip.price-down {
+    background-color: rgba(220, 53, 69, 0.15);
+}
+
+/* Style for the top line (absolute change) */
+.absolute-change {
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.price-change-chip.price-up .absolute-change {
+    color: #28a745;
+}
+.price-change-chip.price-down .absolute-change {
+    color: #dc3545;
+}
+
+/* Style for the bottom line (percentage change) */
+.percent-change {
+    font-size: 0.8rem;
+    margin-left: 1rem;
+    font-weight: 500;
+    color: var(--light-gray-text); /* Lighter color for secondary info */
+}
+/* ================================================================= */
+/* ===    FINAL AESTHETIC "CHIP" STYLE for Price Change          === */
+/* ================================================================= */
+
+.price-change-chip {
+    padding: 0.5rem 0.9rem; /* Fine-tuned padding */
+    border-radius: 10px;    /* Slightly more rounded corners like the image */
+    display: flex;
+    flex-direction: column;  /* Stack the text vertically */
+    align-items: flex-start; /* Align both lines of text to the left */
+    justify-content: center;
+    line-height: 1.3;        /* Adjust line spacing for a tight look */
+    min-width: 90px;         /* Give it a minimum width for balance */
+    text-align: left;
+}
+
+.price-change-chip.price-up {
+    background-color: rgba(40, 167, 69, 0.2); /* A subtle green background */
+}
+
+.price-change-chip.price-down {
+    background-color: rgba(220, 53, 69, 0.2); /* A subtle red background */
+}
+
+/* Style for the top line (absolute change) */
+.absolute-change {
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.price-change-chip.price-up .absolute-change {
+    color: #28a745; /* Bright green text */
+}
+
+.price-change-chip.price-down .absolute-change {
+    color: #dc3545; /* Bright red text */
+}
+
+/* Style for the bottom line (percentage change) */
+.percent-change {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--light-gray-text); /* Lighter color for secondary info */
+}
+/* ================================================================= */
+/* ===    FINAL PERFECTLY ALIGNED "CHIP" STYLES                  === */
+/* ================================================================= */
+
+/* The main price and the chip are aligned using flexbox */
+.price-main {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* --- The Chip Container --- */
+.price-change-chip {
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px;
+    /* This makes the chip only as wide as its content */
+    display: inline-block;
+}
+
+.price-change-chip.price-up {
+    background-color: rgba(40, 167, 69, 0.2);
+}
+
+.price-change-chip.price-down {
+    background-color: rgba(220, 53, 69, 0.2);
+}
+
+/* --- The Top Line (Absolute Change) --- */
+.absolute-change {
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;       /* Use flex to keep the arrow and number together */
+    justify-content: center; /* Center the content within this line */
+    align-items: center;
+    gap: 0.3rem;
+    line-height: 1.3;
+}
+
+.price-change-chip.price-up .absolute-change {
+    color: #28a745;
+}
+
+.price-change-chip.price-down .absolute-change {
+    color: #dc3545;
+}
+
+/* --- The Bottom Line (Percentage Change) --- */
+.percent-change {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--light-gray-text);
+    /* This is the key: it centers the text within this block */
+    text-align: center;
+    line-height: 1.2;
+}
+/* ========================================================= */
+/* ===         STYLES FOR DYNAMIC AUTH BUTTONS           === */
+/* ========================================================= */
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- Logged Out Styles --- */
+.login-button, .signup-button {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.login-button {
+    background-color: transparent;
+    color: var(--light-text);
+}
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.signup-button {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+.signup-button:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+}
+
+
+/* --- Logged In Styles --- */
+.user-greeting {
+    color: var(--light-gray-text);
+    font-weight: 600;
+    max-width: 150px; /* Prevent long emails from breaking layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.logout-button {
+    background-color: #4a5568; /* A neutral gray */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.logout-button:hover {
+    background-color: #5f6f87;
+}
+
+
+/* --- Responsive adjustments for hamburger menu --- */
+/* You'll likely need to hide these buttons when the hamburger is active */
+@media (max-width: 768px) {
+    .auth-buttons {
+        display: none; /* Hide the auth buttons on mobile to not conflict with hamburger */
+        /* Alternatively, you can move them inside the slide-out menu */
+    }
+}
+
+/* ========================================================= */
+/* ===    NEW AESTHETIC & PROFESSIONAL HEADER STYLES     === */
+/* ========================================================= */
+
+/* --- Main Header Container --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+    
+    /* The Frosted Glass Effect */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark, semi-transparent base */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Navigation Bar Layout --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Logo Styling --- */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+.logo img {
+    height: 50px; /* Adjust as needed */
+}
+.logo span {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* --- Center & Right Nav Container --- */
+.nav-center-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem; /* Space between links and auth buttons */
+}
+
+/* --- Navigation Links (Center) --- */
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+.nav-links a {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s;
+}
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+.nav-links a.active {
+    color: var(--text-primary);
+}
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+
+/* --- Auth Buttons (Right) --- */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Ghost Button Style */
+.login-button {
+    background-color: transparent;
+    color: var(--text-secondary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* Primary CTA Button Style */
+.signup-button-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+.signup-button-primary:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Logged-In User Styles */
+.user-greeting {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.logout-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* --- Hamburger Menu & Responsive Design --- */
+
+
+@media (max-width: 900px) { /* Adjust breakpoint as needed */
+    .nav-center-right {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(17, 17, 17, 0.95); /* Slightly more opaque for readability */
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0 2rem 0;
+        gap: 1.5rem;
+        
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+    }
+    
+    .nav-center-right.active {
+        max-height: 500px; /* Animate open */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+}
+/* ========================================================= */
+/* ===    FINAL AESTHETIC & PROFESSIONAL HEADER STYLES     === */
+/* ========================================================= */
+
+/* --- Main Header Container --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+    
+    /* THE CORRECT DARK & FROSTED GLASS EFFECT */
+    background-color: rgb(0, 0, 0); /* Dark charcoal, semi-transparent */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Navigation Bar Layout --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Logo Styling --- */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    cursor: pointer;
+    /* margin-left: -8rem; */
+}
+.logo img {
+    height: 75px; /* A bit larger for more impact */
+}
+/* The text next to the logo is now removed as per your JSX update */
+
+
+/* --- Center & Right Nav Container --- */
+.nav-center-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+/* --- Navigation Links (Center) --- */
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2.5rem; /* Increased spacing for a cleaner look */
+}
+.nav-links a {
+    color: var(--text-secondary); /* Softer gray for inactive links */
+    font-weight: 500; /* Medium weight */
+    font-size: 0.95rem;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s;
+}
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+.nav-links a.active {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+/* The active underline is removed for a cleaner look, matching the example */
+.nav-links a.active::after {
+    content: none; 
+}
+
+
+/* --- Auth Buttons (Right) --- */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* margin-left: 13rem;
+    margin-right: -7rem; */
+}
+
+/* GHOST BUTTON (LOGIN) */
+.login-button {
+    background-color: transparent;
+    color: var(--text-secondary);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+.login-button:hover {
+    color: var(--text-primary);
+}
+
+/* PRIMARY CTA BUTTON (SIGN UP) */
+.signup-button-primary {
+    background-color: #007bff; /* The vibrant blue from the image */
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+.signup-button-primary:hover {
+    background-color: #0069d9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* LOGGED-IN USER STYLES */
+.user-greeting {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.logout-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* --- Hamburger Menu & Responsive Design --- */
+
+
+@media (max-width: 900px) { /* Adjust breakpoint as needed */
+    .nav-center-right {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(17, 17, 17, 0.95);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0 2rem 0;
+        gap: 1.5rem;
+        
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+    }
+    
+    .nav-center-right.active {
+        max-height: 500px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+}
+/* ========================================================= */
+/* ===    FINAL ROBUST & RESPONSIVE HEADER STYLES        === */
+/* ========================================================= */
+
+/* --- Main Header Container --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.5rem 0; /* A bit tighter for a sleeker look */
+    background-color: rgb(0, 0, 0);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Navigation Bar Layout --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Logo Styling --- */
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 10; /* Ensure logo is above the mobile menu */
+}
+.logo img {
+    height: 60px; /* Adjusted for a better mobile presence */
+}
+
+/* --- DESKTOP: Center & Right Nav Container --- */
+.nav-center-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+.nav-links a {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text-primary);
+}
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+/* ... (Your existing button styles for .login-button, .signup-button-primary, etc. are fine) ... */
+
+
+/* --- Hamburger Menu (Mobile Only) --- */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    z-index: 10; /* Ensure it's clickable above other content */
+    /* ... (Your other hamburger styles are fine) ... */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+.hamburger .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* ================================================= */
+/* ===    MOBILE RESPONSIVE STYLES (THE FIX)     === */
+/* ================================================= */
+@media (max-width: 900px) {
+    .hamburger {
+        display: flex; /* Show the hamburger */
+    }
+
+    /* Hide the entire container of links and buttons on desktop */
+    .nav-center-right {
+        position: fixed; /* Use fixed for a full-screen overlay effect */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Full screen height */
+        
+        background-color: rgba(0, 0, 0, 0.95); /* Opaque black background */
+        backdrop-filter: blur(10px);
+        
+        /* Layout for the items INSIDE the menu */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        
+        /* Animation: Slide in from the right */
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    /* When the menu is active, slide it into view */
+    .nav-center-right.active {
+        transform: translateX(0);
+    }
+    
+    /* Style the links and buttons for the mobile menu */
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    .nav-links a {
+        font-size: 1.5rem; /* Larger, more tappable text */
+    }
+    
+    .auth-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 80%;
+    }
+    .login-button, .signup-button-primary, .logout-button {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+    .user-greeting {
+        font-size: 1.2rem;
+    }
+}
+
+/* ================================================= */
+/* ===    HAMBURGER & MOBILE STYLES (FINAL FIX)  === */
+/* ================================================= */
+
+.hamburger {
+    display: none; /* Hidden on desktop */
+    z-index: 10;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- ANIMATION for hamburger to 'X' --- */
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+
+@media (max-width: 900px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-center-right {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        
+        /* Layout for items INSIDE the menu */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        
+        /* Animation: Slide in from the right */
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .nav-center-right.active {
+        transform: translateX(0);
+    }
+    
+    /* --- THIS IS THE CRITICAL FIX --- */
+    /* We use a more specific selector to ensure these styles win */
+    .nav-center-right .nav-links {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .nav-center-right .nav-links a {
+        font-size: 1.5rem;
+    }
+    
+    .nav-center-right .auth-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 80%;
+        margin-top: 1rem; /* Add some space above the buttons */
+    }
+
+    .nav-center-right .login-button,
+    .nav-center-right .signup-button-primary,
+    .nav-center-right .logout-button {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+    .nav-center-right .user-greeting {
+        font-size: 1.2rem;
+    }
+}
+/* ========================================================= */
+/* ===    AESTHETIC & PROFESSIONAL HEADER STYLES         === */
+/* ========================================================= */
+
+/* --- Main Header Container --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.5rem 0; /* A bit tighter for a sleeker look */
+    
+    /* The Frosted Glass Effect */
+    background-color: rgba(10, 10, 10, 0.75); /* Dark, semi-transparent base */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* For Safari support */
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* --- Navigation Bar Layout --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Logo Styling --- */
+.logo img {
+    height: 60px; /* Adjust size as needed */
+    width: auto;
+}
+
+/* --- DESKTOP: Center & Right Nav Container --- */
+.nav-center-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2.5rem; /* Spacing between links */
+}
+
+.nav-links a {
+    color: #a0aec0; /* Softer gray for inactive links */
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+.nav-links a.active {
+    color: #ffffff;
+}
+
+/* --- Auth Buttons (Right Side) --- */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Ghost Button Style (Login) */
+.login-button {
+    background-color: transparent;
+    color: #a0aec0;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* Primary CTA Button Style (Sign Up) */
+.signup-button-primary {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.signup-button-primary:hover {
+    background-color: #0069d9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Logged-In User Styles */
+.user-greeting {
+    color: #f7fafc;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.logout-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f7fafc;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Hamburger Menu Icon --- */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    z-index: 1001; /* Must be on top of the overlay */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff; /* White bars for visibility */
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animation for hamburger to 'X' */
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+
+/* ================================================= */
+/* ===    MOBILE RESPONSIVE STYLES               === */
+/* ================================================= */
+@media (max-width: 900px) {
+    .hamburger {
+        display: flex; /* Show the hamburger on mobile */
+    }
+
+    /* This is the full-screen overlay menu */
+    .nav-center-right {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        
+        background-color: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        
+        /* Layout for items INSIDE the menu */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        
+        /* Animation: Hide off-screen by default */
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    /* When the menu is active, slide it into view */
+    .nav-center-right.active {
+        transform: translateX(0);
+    }
+    
+    /* Style the links and buttons for the mobile menu */
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem; /* Larger, more tappable text */
+    }
+    
+    .auth-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 80%;
+        margin-top: 1rem; /* Add space above the buttons */
+    }
+
+    .login-button,
+    .signup-button-primary,
+    .logout-button {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .user-greeting {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* ========================================================= */
+/* ===    DYNAMIC & PROFESSIONAL HEADER STYLES           === */
+/* ========================================================= */
+
+/* --- Main Header Container (Default "at the top" state) --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0rem 0;
+    
+    /* STARTING STATE: Perfectly transparent */
+    background-color: rgb(14, 13, 22);
+    border-bottom: 1px solid transparent; /* Use transparent border for smooth transition */
+
+    /* SMOOTH TRANSITION: This animates the change on scroll */
+    transition: background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* --- SCROLLED STATE: This is the frosted glass effect --- */
+header.scrolled {
+    background-color: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+/* === 1. ENHANCED NAVIGATION LINKS === */
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 3rem; /* Increased gap for more breathing room */
+}
+
+.nav-links a {
+    color: #a0aec0; /* Softer gray for inactive links */
+    font-weight: 500; /* Medium weight for a cleaner look */
+    font-size: 0.95rem;
+    text-decoration: none;
+    position: relative; /* Required for the animated underline */
+    padding-bottom: 8px; /* Space for the underline to appear */
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+/* The animated underline effect */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Start the line in the middle */
+    transform: translateX(-50%); /* Center the line perfectly */
+    width: 0; /* Initially hidden */
+    height: 2px;
+    background-color: #007BFF;
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1); /* A smooth animation */
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%; /* Animate to full width on hover or if active */
+}
+
+.nav-links a.active {
+    color: #ffffff;
+}
+/* --- Keep all your other header-related styles the same --- */
+/* (nav, .logo, .nav-links, .auth-buttons, .hamburger, and media queries) */
+/* === 2. BEAUTIFUL & PROFESSIONAL BUTTONS === */
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* --- REFINED "GHOST" BUTTON (LOGIN) --- */
+.login-button {
+    background-color: transparent;
+    color: #a0aec0;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+}
+
+/* --- GRADIENT & GLOW "PRIMARY" BUTTON (SIGN UP) --- */
+.signup-button-primary {
+    background-image: linear-gradient(to right, #5500ff, #014d9f);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.signup-button-primary:hover {
+    transform: translateY(-2px); /* "Lift" the button */
+    box-shadow: 0 7px 25px rgba(15, 135, 194, 0.4); /* Enhance the glow */
+    background-color: white;
+    
+}
+
+/* --- Logged-In User Styles (Consistent Design) --- */
+.user-greeting {
+    color: #f7fafc;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.logout-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f7fafc;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(220, 53, 69, 0.8); /* A subtle red for destructive action */
+}
+nav {
+    display: flex;
+    align-items: center; /* This remains the same */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+   
+}
+
+/* --- UPDATED Center & Right Nav Container --- */
+.nav-center-right {
+    display: flex;
+    align-items: center;
+    /* THIS IS THE KEY: Make this container fill all available horizontal space */
+    flex-grow: 1; 
+}
+/* --- ADD THIS NEW RULE for Centering --- */
+.nav-links {
+    /* These two lines create the centering effect */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* (The rest of your .nav-links styles remain the same) */
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 3rem; 
+}
+
+
