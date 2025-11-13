@@ -287,7 +287,62 @@
   gap: 0.6rem;
 }
 
+.button-with-tooltip {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.button-with-tooltip:hover .button-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.button-tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  transform: translateY(8px);
+  width: 280px;
+  background: #0d1117;
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 9999;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.button-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  border: 8px solid transparent;
+  border-top-color: #0d1117;
+}
+
+.button-tooltip .tooltip-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #58a6ff;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.button-tooltip .tooltip-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #c9d1d9;
+}
+
 .action-buttons button {
+  width: 100%;
   padding: 0.7rem;
   border: 1px solid;
   border-radius: 20px;

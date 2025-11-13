@@ -204,6 +204,35 @@ tbody tr:hover {
 .text-green { color: var(--tp-color-green, #4ade80); }
 .text-red { color: var(--tp-color-red, #f87171); }
 
+/* --- LOADING & EMPTY STATES --- */
+.loading-state, .empty-state, .not-connected-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--tp-text-secondary, #a0aec0);
+  font-size: 1rem;
+}
+
+.not-connected-state {
+  background: var(--tp-bg-secondary, #1e222d);
+  border-radius: 0.75rem;
+  border: 1px solid var(--tp-border-color, #3d4351);
+  margin: 2rem 0;
+}
+
+.not-connected-state h2 {
+  color: var(--tp-text-primary, #e0e3eb);
+  font-weight: 600;
+  margin: 0;
+}
+
+.loading-state {
+  font-style: italic;
+}
+
+.empty-state {
+  color: var(--tp-text-secondary, #8b949e);
+}
+
 
 /******************************************/
 /* --- RESPONSIVE STYLES FOR MOBILE --- */

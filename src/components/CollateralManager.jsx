@@ -300,20 +300,36 @@ export function CollateralManager() {
         {isDepositing ? (
           <>
             {needsApproval && (
-              <button
-                className="approve-button"
-                onClick={handleApprove}
-                disabled={isApproving || isApprovingTx}
-              >
-                {isApproving || isApprovingTx
-                  ? "Approving..."
-                  : `Approve ${selectedToken.symbol}`}
-              </button>
+              <div className="button-with-tooltip">
+                <button
+                  className="approve-button"
+                  onClick={handleApprove}
+                  disabled={isApproving || isApprovingTx}
+                >
+                  {isApproving || isApprovingTx
+                    ? "Approving..."
+                    : `Approve ${selectedToken.symbol}`}
+                </button>
+                <div className="button-tooltip">
+                  <div className="tooltip-title">Why Approve?</div>
+                  <div className="tooltip-text">
+                    Approval grants the smart contract permission to move your
+                    tokens. This is a one-time transaction required before
+                    depositing. You only need to approve once per token unless
+                    you want to increase the allowance.
+                  </div>
+                </div>
+              </div>
             )}
             <button
               className="deposit-button"
               onClick={handleDeposit}
               disabled={needsApproval || isDepositPending || !amount}
+              title={
+                needsApproval
+                  ? "Please approve tokens first"
+                  : "Deposit collateral to start trading"
+              }
             >
               {isDepositPending ? "Depositing..." : "Deposit Collateral"}
             </button>
@@ -323,6 +339,7 @@ export function CollateralManager() {
             className="withdraw-button"
             onClick={handleWithdraw}
             disabled={isWithdrawPending || !amount}
+            title="Withdraw your collateral back to your wallet"
           >
             {isWithdrawPending ? "Withdrawing..." : "Withdraw Collateral"}
           </button>

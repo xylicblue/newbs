@@ -8,6 +8,51 @@ import CollateralManager from "./components/CollateralManager";
 import { useOpenPosition, useAccountValue } from "./hooks/useClearingHouse";
 import { MARKET_IDS } from "./contracts/addresses";
 
+// Info Tooltip Component
+const InfoTooltip = ({ title, description }) => {
+  const [position, setPosition] = React.useState({ top: 0, left: 0 });
+  const [isHovered, setIsHovered] = React.useState(false);
+  const wrapperRef = React.useRef(null);
+
+  const handleMouseEnter = () => {
+    if (wrapperRef.current) {
+      const rect = wrapperRef.current.getBoundingClientRect();
+      setPosition({
+        top: rect.bottom,
+        left: rect.right - 220, // Align right edge of tooltip with icon
+      });
+      setIsHovered(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  return (
+    <div
+      className="info-icon-wrapper"
+      ref={wrapperRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <span className="info-icon">ⓘ</span>
+      {isHovered && (
+        <div
+          className="info-tooltip info-tooltip-visible"
+          style={{
+            top: `${position.top}px`,
+            left: `${position.left}px`,
+          }}
+        >
+          <div className="tooltip-title">{title}</div>
+          <div className="tooltip-text">{description}</div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const mockUserAccount = {
   availableMargin: "18,450.00 USDC",
 };
@@ -75,8 +120,8 @@ export const TradingPanel = ({ selectedMarket }) => {
   const changeIsPositive = market.change24hValue >= 0;
 
   // --- DYNAMIC LABELS ---
-  const buyLabel = isPerpetual ? "Buy" : "Buy";
-  const sellLabel = isPerpetual ? "Sell" : "Sell";
+  const buyLabel = "Buy (Long)";
+  const sellLabel = "Sell (Short)";
 
   const handleSizeButtonClick = (percentage) => {
     const simulatedTotal = 2.5;
@@ -155,39 +200,46 @@ export const TradingPanel = ({ selectedMarket }) => {
         {/* Market Stats Grid */}
         <div className="market-stats">
           <div className="stat-item">
-            <span className="label" title="Current vAMM trading price">
+            <span className="label">
               Mark Price
+              <InfoTooltip
+                title="Mark Price"
+                description="The current trading price from the virtual Automated Market Maker (vAMM). This is the price at which trades are executed on the platform."
+              />
             </span>
             <span className="value price-mark">${market.price}</span>
           </div>
           {isPerpetual && (
             <>
               <div className="stat-item">
-                <span
-                  className="label"
-                  title="15-minute Time-Weighted Average Price"
-                >
+                <span className="label">
                   TWAP (15m)
+                  <InfoTooltip
+                    title="TWAP (15 min)"
+                    description="Time-Weighted Average Price over the last 15 minutes. This smoothed price helps prevent manipulation and is used for funding rate calculations."
+                  />
                 </span>
                 <span className="value">${market.vammPrice}</span>
               </div>
               <div className="stat-item">
-                <span
-                  className="label"
-                  title="Oracle/Index price from Chainlink or external source"
-                >
+                <span className="label">
                   Index Price
+                  <InfoTooltip
+                    title="Index Price"
+                    description="The reference price from external oracles (like Chainlink). Represents the spot market price and is used to calculate funding rates and prevent market manipulation."
+                  />
                 </span>
                 <span className="value">${market.indexPrice}</span>
               </div>
             </>
           )}
           <div className="stat-item">
-            <span
-              className="label"
-              title="Estimated based on TWAP vs current price"
-            >
+            <span className="label">
               24h Change
+              <InfoTooltip
+                title="24h Change"
+                description="The percentage price change over the last 24 hours. Calculated by comparing current price with the price from 24 hours ago."
+              />
             </span>
             <span
               className={`value ${
@@ -199,11 +251,12 @@ export const TradingPanel = ({ selectedMarket }) => {
             </span>
           </div>
           <div className="stat-item">
-            <span
-              className="label"
-              title="Estimated trading volume (requires event indexing for accuracy)"
-            >
+            <span className="label">
               24h Volume
+              <InfoTooltip
+                title="24h Volume"
+                description="Total trading volume in USD over the last 24 hours. Higher volume indicates more active trading and better liquidity."
+              />
             </span>
             <span className="value">
               {market.volume24h}
@@ -212,13 +265,12 @@ export const TradingPanel = ({ selectedMarket }) => {
           </div>
           {isPerpetual ? (
             <div className="stat-item">
-              <span
-                className="label"
-                title={`Premium: ${market.premium || "0%"} | Annualized: ${
-                  market.fundingRateAnnualized || "N/A"
-                }`}
-              >
+              <span className="label">
                 Funding Rate
+                <InfoTooltip
+                  title="Funding Rate"
+                  description="The periodic payment between long and short positions every 8 hours. Positive rates mean longs pay shorts; negative rates mean shorts pay longs. This keeps the perpetual price anchored to the spot price."
+                />
               </span>
               <span className="value funding-rate">
                 {market.fundingRate}
@@ -245,13 +297,15 @@ export const TradingPanel = ({ selectedMarket }) => {
               className={`tp-tab-btn ${side === "Buy" ? "active-buy" : ""}`}
               onClick={() => setSide("Buy")}
             >
-              {buyLabel}
+              <span className="btn-main-text">{"BUY"}</span>
+              <span className="btn-sub-text">(LONG)</span>
             </button>
             <button
               className={`tp-tab-btn ${side === "Sell" ? "active-sell" : ""}`}
               onClick={() => setSide("Sell")}
             >
-              {sellLabel}
+              <span className="btn-main-text">{"SELL"}</span>
+              <span className="btn-sub-text">(SHORT)</span>
             </button>
           </div>
 
@@ -282,12 +336,22 @@ export const TradingPanel = ({ selectedMarket }) => {
             </div>
           </div>
 
-          <div className="size-slider">
-            {[25, 50, 75, 100].map((p) => (
-              <button key={p} onClick={() => handleSizeButtonClick(p)}>
-                {p}%
-              </button>
-            ))}
+          <div className="size-slider-section">
+            <div className="size-slider-header">
+              <span className="size-slider-label">Quick Size</span>
+              <span className="size-slider-hint">% of available balance</span>
+            </div>
+            <div className="size-slider">
+              {[25, 50, 75, 100].map((p) => (
+                <button
+                  key={p}
+                  onClick={() => handleSizeButtonClick(p)}
+                  title={`Use ${p}% of available balance`}
+                >
+                  {p}%
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="order-summary-item">

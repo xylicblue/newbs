@@ -15,11 +15,20 @@ export const TradingDashboard = () => {
 
   return (
     <div className="trading-dashboard">
+      {/* Phantom Mode Pill */}
+      <div className="phantom-mode-pill">
+        <span className="phantom-icon">👻</span>
+        <span className="phantom-label">PHANTOM MODE</span>
+        <span className="phantom-divider">|</span>
+        <span className="phantom-status">Testnet</span>
+      </div>
+
       {/* --- Left Column: Markets and Wallet (Sticky) --- */}
       <div className="dashboard-markets">
         <div className="panel">
           <Markets />
         </div>
+        <div className="gradient-divider"></div>
         <div className="panel" style={{ marginTop: "1rem" }}>
           <WalletStatus />
         </div>
@@ -30,6 +39,7 @@ export const TradingDashboard = () => {
         <div className="panel" style={{ padding: "0.25rem" }}>
           <PriceIndexChart />
         </div>
+        <div className="section-divider"></div>
         <div className="panel" style={{ marginTop: "1rem" }}>
           <PositionPanel />
         </div>

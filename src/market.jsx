@@ -1,6 +1,6 @@
 // src/components/Markets.js --- PURE CSS VERSION ---
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useMarketsData } from "./marketData";
 // We no longer import any shadcn components
 import { useMarket } from "./marketcontext";
@@ -17,6 +17,36 @@ export const Markets = () => {
   const [filter, setFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const { selectMarket } = useMarket();
+  const previousPricesRef = useRef({});
+  const [priceChanges, setPriceChanges] = useState({});
+
+  // Track price changes for animations
+  useEffect(() => {
+    const changes = {};
+    markets.forEach((market) => {
+      const currentPrice = market.markPrice || market.oraclePrice;
+      const previousPrice = previousPricesRef.current[market.name];
+
+      if (previousPrice !== undefined && previousPrice !== currentPrice) {
+        changes[market.name] = currentPrice > previousPrice ? "up" : "down";
+
+        // Clear animation after duration
+        setTimeout(() => {
+          setPriceChanges((prev) => {
+            const updated = { ...prev };
+            delete updated[market.name];
+            return updated;
+          });
+        }, 1000);
+      }
+
+      previousPricesRef.current[market.name] = currentPrice;
+    });
+
+    if (Object.keys(changes).length > 0) {
+      setPriceChanges((prev) => ({ ...prev, ...changes }));
+    }
+  }, [markets]);
 
   const filteredAndSearchedMarkets = useMemo(() => {
     return markets
@@ -97,20 +127,42 @@ export const Markets = () => {
                 <td className="font-medium">
                   {market.displayName || market.name}
                   {market.status === "Deprecated" && (
-                    <span style={{ marginLeft: '8px', fontSize: '0.75rem', color: '#888' }}>
-                      [OLD]
-                    </span>
+                    <span className="deprecated-badge-small">OLD</span>
                   )}
                 </td>
-                <td className="text-right">
+                <td
+                  className={`text-right market-price ${
+                    priceChanges[market.name]
+                      ? `price-flash-${priceChanges[market.name]}`
+                      : ""
+                  }`}
+                >
                   ${formatPrice(market.markPrice || market.oraclePrice)}
+                  {priceChanges[market.name] && (
+                    <span
+                      className={`price-indicator price-indicator-${
+                        priceChanges[market.name]
+                      }`}
+                    >
+                      {priceChanges[market.name] === "up" ? "↑" : "↓"}
+                    </span>
+                  )}
                 </td>
                 <td
                   className={`text-right ${
                     market.change24h > 0 ? "text-green" : "text-red"
                   }`}
                 >
-                  {formatPercent(market.change24h)}
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    {market.change24h > 0 ? "▲" : "▼"}
+                    {formatPercent(market.change24h)}
+                  </span>
                 </td>
               </tr>
             ))}

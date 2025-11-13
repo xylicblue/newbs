@@ -302,23 +302,18 @@ const LandingPage = () => {
       />
       <header className={isScrolled ? "scrolled" : ""}>
         <nav>
-          <Routerlink to="/">
-            <div
-              className="logo"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              style={{ cursor: "pointer" }}
-            >
-              <img src={logoImage} alt="Byte Strike Logo" />
-            </div>
-          </Routerlink>
+          <div className="nav-left">
+            <Routerlink to="/">
+              <div
+                className="logo"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={logoImage} alt="Byte Strike Logo" />
+              </div>
+            </Routerlink>
 
-          <div className={`nav-center-right ${isMenuOpen ? "active" : ""}`}>
-            <ul className="nav-links">
-              <li>
-                <Routerlink to="/trade" className="trade-button-nav">
-                  Trade
-                </Routerlink>
-              </li>
+            <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
               <li>
                 <Link
                   to="what-we-do"
@@ -372,6 +367,12 @@ const LandingPage = () => {
                 </Link>
               </li>
             </ul>
+          </div>
+
+          <div className={`nav-right ${isMenuOpen ? "active" : ""}`}>
+            <Routerlink to="/trade" className="trade-button-nav">
+              Trade
+            </Routerlink>
 
             <div className="auth-buttons">
               {session && profile ? (
@@ -392,6 +393,7 @@ const LandingPage = () => {
               )}
             </div>
           </div>
+
           <button
             className={`hamburger ${isMenuOpen ? "active" : ""}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}

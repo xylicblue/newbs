@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "./creatclient";
+import { useAccount } from "wagmi";
+import { useAllPositions, useAccountValue } from "./hooks/useClearingHouse";
 import "./portfolio.css";
 
 import {
@@ -201,6 +203,13 @@ const PortfolioPage = () => {
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
   const [activeTab, setActiveTab] = useState("positions");
+  const [orderHistory, setOrderHistory] = useState([]);
+  const [tradeHistory, setTradeHistory] = useState([]);
+
+  // Get wallet connection and blockchain data
+  const { address, isConnected } = useAccount();
+  const { positions, isLoading: positionsLoading } = useAllPositions();
+  const { accountValue, isLoading: accountLoading } = useAccountValue();
 
   useEffect(() => {
     // Fetch the current session
@@ -233,126 +242,168 @@ const PortfolioPage = () => {
     }
   }, [session]);
 
+  useEffect(() => {
+    // Fetch order history from Supabase (if you have this table)
+    if (address) {
+      supabase
+        .from("orders")
+        .select("*")
+        .eq("user_address", address.toLowerCase())
+        .order("created_at", { ascending: false })
+        .limit(50)
+        .then(({ data, error }) => {
+          if (error) console.warn("Error fetching orders:", error.message);
+          if (data) setOrderHistory(data);
+        });
+
+      // Fetch trade history from Supabase (if you have this table)
+      supabase
+        .from("trades")
+        .select("*")
+        .eq("user_address", address.toLowerCase())
+        .order("created_at", { ascending: false })
+        .limit(50)
+        .then(({ data, error }) => {
+          if (error) console.warn("Error fetching trades:", error.message);
+          if (data) setTradeHistory(data);
+        });
+    }
+  }, [address]);
+
   const renderContent = () => {
     switch (activeTab) {
       case "positions":
         return (
           <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Market</th>
-                  <th>Side</th>
-                  <th>Size</th>
-                  <th>Entry Price</th>
-                  <th>Mark Price</th>
-                  <th>Unrealized P&L</th>
-                  <th>Liq. Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mockOpenPositions.map((pos) => (
-                  <tr key={pos.market}>
-                    <td>{pos.market}</td>
-                    <td
-                      className={
-                        pos.side === "Long" ? "text-green" : "text-red"
-                      }
-                    >
-                      <div className="side-cell">
-                        {pos.side === "Long" ? <HiArrowUp /> : <HiArrowDown />}{" "}
-                        {pos.side}
-                      </div>
-                    </td>
-                    <td>{pos.size}</td>
-                    <td>${pos.entryPrice.toLocaleString()}</td>
-                    <td>${pos.markPrice.toLocaleString()}</td>
-                    <td className={pos.pnl >= 0 ? "text-green" : "text-red"}>
-                      ${pos.pnl.toLocaleString()}
-                    </td>
-                    <td>${pos.liqPrice.toLocaleString()}</td>
+            {positionsLoading ? (
+              <div className="loading-state">Loading positions...</div>
+            ) : positions.length === 0 ? (
+              <div className="empty-state">No open positions</div>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Market</th>
+                    <th>Side</th>
+                    <th>Size</th>
+                    <th>Entry Price</th>
+                    <th>Margin</th>
+                    <th>Realized P&L</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {positions.map((pos) => (
+                    <tr key={pos.marketId}>
+                      <td>{pos.marketName}</td>
+                      <td className={pos.isLong ? "text-green" : "text-red"}>
+                        <div className="side-cell">
+                          {pos.isLong ? <HiArrowUp /> : <HiArrowDown />}{" "}
+                          {pos.isLong ? "Long" : "Short"}
+                        </div>
+                      </td>
+                      <td>{Math.abs(parseFloat(pos.size)).toFixed(4)}</td>
+                      <td>${parseFloat(pos.entryPriceX18).toFixed(2)}</td>
+                      <td>${parseFloat(pos.margin).toFixed(2)}</td>
+                      <td
+                        className={
+                          parseFloat(pos.realizedPnL) >= 0
+                            ? "text-green"
+                            : "text-red"
+                        }
+                      >
+                        ${parseFloat(pos.realizedPnL).toFixed(2)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         );
       case "orders":
         return (
           <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Market</th>
-                  <th>Type</th>
-                  <th>Side</th>
-                  <th>Price</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mockOrderHistory.map((order, index) => (
-                  <tr key={index}>
-                    <td>{order.date}</td>
-                    <td>{order.market}</td>
-                    <td>{order.type}</td>
-                    <td
-                      className={
-                        order.side === "Buy" ? "text-green" : "text-red"
-                      }
-                    >
-                      {order.side}
-                    </td>
-                    <td>${order.price.toLocaleString()}</td>
-                    <td>{order.amount}</td>
-                    <td>
-                      <span
-                        className={`status-badge status-${order.status.toLowerCase()}`}
-                      >
-                        {order.status}
-                      </span>
-                    </td>
+            {orderHistory.length === 0 ? (
+              <div className="empty-state">No order history available</div>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Market</th>
+                    <th>Type</th>
+                    <th>Side</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {orderHistory.map((order, index) => (
+                    <tr key={index}>
+                      <td>{new Date(order.created_at).toLocaleString()}</td>
+                      <td>{order.market}</td>
+                      <td>{order.order_type}</td>
+                      <td
+                        className={
+                          order.side === "Buy" ? "text-green" : "text-red"
+                        }
+                      >
+                        {order.side}
+                      </td>
+                      <td>${parseFloat(order.price).toLocaleString()}</td>
+                      <td>{order.amount}</td>
+                      <td>
+                        <span
+                          className={`status-badge status-${order.status.toLowerCase()}`}
+                        >
+                          {order.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         );
       case "trades":
         return (
           <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Market</th>
-                  <th>Side</th>
-                  <th>Price</th>
-                  <th>Amount</th>
-                  <th>Fee</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mockTradeHistory.map((trade, index) => (
-                  <tr key={index}>
-                    <td>{trade.date}</td>
-                    <td>{trade.market}</td>
-                    <td
-                      className={
-                        trade.side === "Buy" ? "text-green" : "text-red"
-                      }
-                    >
-                      {trade.side}
-                    </td>
-                    <td>${trade.price.toLocaleString()}</td>
-                    <td>{trade.amount}</td>
-                    <td>${trade.fee.toLocaleString()}</td>
+            {tradeHistory.length === 0 ? (
+              <div className="empty-state">No trade history available</div>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Market</th>
+                    <th>Side</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Fee</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {tradeHistory.map((trade, index) => (
+                    <tr key={index}>
+                      <td>{new Date(trade.created_at).toLocaleString()}</td>
+                      <td>{trade.market}</td>
+                      <td
+                        className={
+                          trade.side === "Buy" ? "text-green" : "text-red"
+                        }
+                      >
+                        {trade.side}
+                      </td>
+                      <td>${parseFloat(trade.price).toLocaleString()}</td>
+                      <td>{trade.amount}</td>
+                      <td>${parseFloat(trade.fee).toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         );
       default:
@@ -360,18 +411,47 @@ const PortfolioPage = () => {
     }
   };
 
+  // Calculate portfolio metrics from real data
+  const totalValue = parseFloat(accountValue) || 0;
+  const totalMargin = positions.reduce(
+    (sum, pos) => sum + parseFloat(pos.margin),
+    0
+  );
+  const totalPnL = positions.reduce(
+    (sum, pos) => sum + parseFloat(pos.realizedPnL),
+    0
+  );
+  const availableMargin = totalValue - totalMargin;
+  const buyingPower = totalValue * 10; // Assuming 10x leverage
+
+  // For 24h P&L, you'd need to store historical data or calculate from price changes
+  // This is a placeholder - ideally fetch from your backend
+  const pnl24h = totalPnL; // You can improve this later
+  const pnl24hPercent =
+    totalValue > 0 ? ((pnl24h / totalValue) * 100).toFixed(2) : 0;
+
+  if (!isConnected) {
+    return (
+      <main className="portfolio-page-main">
+        <div className="not-connected-state">
+          <h2>Please connect your wallet to view your portfolio</h2>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="portfolio-page-main">
       <PortfolioHeader
         username={profile?.username}
-        portfolioValue={mockPortfolioData.totalValue}
-        pnl={mockPortfolioData.pnl24h}
-        pnlPercent={mockPortfolioData.pnl24hPercent}
+        portfolioValue={totalValue}
+        pnl={pnl24h}
+        pnlPercent={pnl24hPercent}
       />
       <AccountSummary
-        availableMargin={mockPortfolioData.availableMargin}
-        totalCollateral={mockPortfolioData.totalCollateral}
-        buyingPower={mockPortfolioData.buyingPower}
+        availableMargin={availableMargin}
+        totalCollateral={totalValue}
+        buyingPower={buyingPower}
       />
       <div className="portfolio-content-panel">
         <HistoryTabs activeTab={activeTab} setActiveTab={setActiveTab} />

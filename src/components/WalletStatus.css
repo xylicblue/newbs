@@ -39,6 +39,13 @@
   background: rgba(63, 185, 80, 0.15);
   color: #3fb950;
   border: 1px solid rgba(63, 185, 80, 0.3);
+  box-shadow: 0 0 10px rgba(63, 185, 80, 0.3);
+  animation: pulse-online 2s ease-in-out infinite;
+}
+
+@keyframes pulse-online {
+  0%, 100% { box-shadow: 0 0 10px rgba(63, 185, 80, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(63, 185, 80, 0.5); }
 }
 
 .status-badge.offline {
@@ -66,9 +73,11 @@
   gap: 8px;
   margin-bottom: 0.75rem;
   padding: 0.6rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid #30363d;
+  background: rgba(13, 17, 23, 0.6);
+  border: 1px solid rgba(88, 166, 255, 0.15);
   border-radius: 8px;
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
 }
 
 .address-label {
