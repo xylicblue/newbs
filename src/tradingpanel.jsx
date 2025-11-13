@@ -11,7 +11,11 @@ import { MARKET_IDS } from "./contracts/addresses";
 
 // Info Tooltip Component with Portal
 const InfoTooltip = ({ title, description }) => {
-  const [position, setPosition] = React.useState({ top: 0, left: 0, arrowLeft: 0 });
+  const [position, setPosition] = React.useState({
+    top: 0,
+    left: 0,
+    arrowLeft: 0,
+  });
   const [isHovered, setIsHovered] = React.useState(false);
   const wrapperRef = React.useRef(null);
 
@@ -21,7 +25,7 @@ const InfoTooltip = ({ title, description }) => {
       const tooltipLeft = rect.right - 220;
       const iconCenter = rect.left + rect.width / 2;
       const arrowLeft = iconCenter - tooltipLeft;
-      
+
       setPosition({
         top: rect.bottom + 8,
         left: tooltipLeft,
@@ -52,7 +56,7 @@ const InfoTooltip = ({ title, description }) => {
             style={{
               top: `${position.top}px`,
               left: `${position.left}px`,
-              '--arrow-left': `${position.arrowLeft}px`,
+              "--arrow-left": `${position.arrowLeft}px`,
             }}
           >
             <div className="tooltip-title">{title}</div>
