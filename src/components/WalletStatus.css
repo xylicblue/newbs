@@ -73,11 +73,9 @@
   gap: 8px;
   margin-bottom: 0.75rem;
   padding: 0.6rem;
-  background: rgba(13, 17, 23, 0.6);
+  background: var(--bg-primary);
   border: 1px solid rgba(88, 166, 255, 0.15);
   border-radius: 8px;
-  backdrop-filter: blur(8px) saturate(140%);
-  -webkit-backdrop-filter: blur(8px) saturate(140%);
 }
 
 .address-label {

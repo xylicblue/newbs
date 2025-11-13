@@ -133,28 +133,23 @@
   gap: 1rem;
 }
 
-/* --- General Panel Styling with Glassmorphism --- */
+/* --- General Panel Styling --- */
 .panel {
-  background: rgba(22, 27, 34, 0.7);
+  background: var(--bg-secondary);
   color: var(--tp-text-primary);
   padding: 1rem;
   border-radius: 12px;
   border: 1px solid rgba(88, 166, 255, 0.15);
   height: auto; /* Let content define height */
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(88, 166, 255, 0.1);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .panel:hover {
-  background: rgba(22, 27, 34, 0.85);
   border-color: rgba(88, 166, 255, 0.3);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(88, 166, 255, 0.2);
   transform: translateY(-2px);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
 }
 
 /* --- Markets Component --- */
@@ -185,9 +180,9 @@
   margin-bottom: 0.75rem;
 }
 
-/* Styling for Search Input with Glassmorphism */
+/* Styling for Search Input */
 .markets-search-input {
-  background: rgba(13, 17, 23, 0.6);
+  background: var(--bg-primary);
   border: 1px solid rgba(88, 166, 255, 0.2);
   color: var(--tp-text-primary);
   height: 2.5rem;
@@ -196,8 +191,6 @@
   font-size: 0.875rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238b949e' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: 0.75rem center;
@@ -211,23 +204,18 @@
   outline: none;
   border-color: var(--tp-accent-blue);
   box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15), 0 4px 12px rgba(88, 166, 255, 0.2);
-  background: rgba(13, 17, 23, 0.8);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
   transform: translateY(-1px);
 }
 
-/* Styling for Tabs with Glassmorphism */
+/* Styling for Tabs */
 .markets-tabs-list {
   display: flex;
   width: 100%;
-  background: rgba(13, 17, 23, 0.6);
+  background: var(--bg-primary);
   border-radius: 20px;
   padding: 4px;
   gap: 4px;
   border: 1px solid rgba(88, 166, 255, 0.2);
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
 }
 .markets-tabs-trigger {
   flex: 1;
@@ -260,15 +248,13 @@
   color: var(--tp-text-primary);
 }
 
-/* --- Table Styling with Glassmorphism --- */
+/* --- Table Styling --- */
 .table-wrapper {
   overflow-x: auto;
   border-radius: 10px;
-  background: rgba(13, 17, 23, 0.5);
+  background: var(--bg-primary);
   border: 1px solid rgba(88, 166, 255, 0.15);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
   margin: 0;
 }
 .markets-table {

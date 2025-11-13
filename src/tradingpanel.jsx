@@ -1,5 +1,6 @@
 // src/components/TradingPanel.js
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import { toast } from "react-hot-toast";
 import "./tradingpanel.css";
 import { useMarketRealTimeData } from "./marketData";
@@ -8,18 +9,23 @@ import CollateralManager from "./components/CollateralManager";
 import { useOpenPosition, useAccountValue } from "./hooks/useClearingHouse";
 import { MARKET_IDS } from "./contracts/addresses";
 
-// Info Tooltip Component
+// Info Tooltip Component with Portal
 const InfoTooltip = ({ title, description }) => {
-  const [position, setPosition] = React.useState({ top: 0, left: 0 });
+  const [position, setPosition] = React.useState({ top: 0, left: 0, arrowLeft: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
   const wrapperRef = React.useRef(null);
 
   const handleMouseEnter = () => {
     if (wrapperRef.current) {
       const rect = wrapperRef.current.getBoundingClientRect();
+      const tooltipLeft = rect.right - 220;
+      const iconCenter = rect.left + rect.width / 2;
+      const arrowLeft = iconCenter - tooltipLeft;
+      
       setPosition({
-        top: rect.bottom,
-        left: rect.right - 220, // Align right edge of tooltip with icon
+        top: rect.bottom + 8,
+        left: tooltipLeft,
+        arrowLeft: arrowLeft,
       });
       setIsHovered(true);
     }
@@ -30,26 +36,31 @@ const InfoTooltip = ({ title, description }) => {
   };
 
   return (
-    <div
-      className="info-icon-wrapper"
-      ref={wrapperRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <span className="info-icon">ⓘ</span>
-      {isHovered && (
-        <div
-          className="info-tooltip info-tooltip-visible"
-          style={{
-            top: `${position.top}px`,
-            left: `${position.left}px`,
-          }}
-        >
-          <div className="tooltip-title">{title}</div>
-          <div className="tooltip-text">{description}</div>
-        </div>
-      )}
-    </div>
+    <>
+      <div
+        className="info-icon-wrapper"
+        ref={wrapperRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <span className="info-icon">ⓘ</span>
+      </div>
+      {isHovered &&
+        ReactDOM.createPortal(
+          <div
+            className="info-tooltip info-tooltip-visible"
+            style={{
+              top: `${position.top}px`,
+              left: `${position.left}px`,
+              '--arrow-left': `${position.arrowLeft}px`,
+            }}
+          >
+            <div className="tooltip-title">{title}</div>
+            <div className="tooltip-text">{description}</div>
+          </div>,
+          document.body
+        )}
+    </>
   );
 };
 

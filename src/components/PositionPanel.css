@@ -1,12 +1,10 @@
 .position-panel {
-  background: rgba(22, 27, 34, 0.7);
+  background: var(--bg-secondary);
   border: 1px solid rgba(88, 166, 255, 0.15);
   border-radius: 12px;
   padding: 24px;
   margin: 20px 0;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
 .position-panel h3 {
@@ -23,14 +21,12 @@
 }
 
 .position-card {
-  background: rgba(13, 17, 23, 0.6);
+  background: var(--bg-primary);
   border: 1px solid rgba(88, 166, 255, 0.15);
   border-radius: 10px;
   padding: 16px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
 }
 
 .position-card.long {
